@@ -1,19 +1,17 @@
 # Core Framework
-fastapi==0.109.0
-uvicorn[standard]==0.27.0
-pydantic==2.5.3
-pydantic-settings==2.1.0
+fastapi==0.115.0
+uvicorn[standard]==0.32.0
+pydantic==2.10.0
+pydantic-settings==2.6.0
 
 # Database
 pymongo==4.6.1
 motor==3.3.2
 
 # AI & Machine Learning
-openai==1.10.0
 google-generativeai==0.8.3
 sentence-transformers==2.3.1
 numpy==1.26.3
-scikit-learn==1.4.0
 
 # Authentication & Security
 python-jose[cryptography]==3.3.0
@@ -24,16 +22,15 @@ bcrypt==4.1.2
 # Utilities
 python-dotenv==1.0.0
 requests==2.31.0
-aiohttp==3.9.1
+aiohttp==3.11.0
 
 # Caching & Performance
 redis==5.0.1
-asyncio==3.4.3
 
 # API Documentation
 swagger-ui-bundle==0.0.9
 
 # Testing (optional)
-pytest==7.4.4
-pytest-asyncio==0.23.3
-httpx==0.26.0
+pytest==8.3.0
+pytest-asyncio==0.24.0
+httpx==0.28.0
