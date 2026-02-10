@@ -9,6 +9,7 @@ const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/ap
 
 export async function POST(request: NextRequest) {
   try {
+    console.log('Backend URL:', BACKEND_URL)
     const body: LoginRequest = await request.json()
 
     const { email, password } = body
@@ -21,6 +22,8 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    console.log('Attempting to connect to backend:', `${BACKEND_URL}/auth/login`)
+
     // Forward to FastAPI backend
     const response = await fetch(`${BACKEND_URL}/auth/login`, {
       method: 'POST',
@@ -30,9 +33,12 @@ export async function POST(request: NextRequest) {
       body: JSON.stringify({ email, password }),
     })
 
+    console.log('Backend response status:', response.status)
+
     const data = await response.json()
 
     if (!response.ok) {
+      console.error('Backend error:', data)
       return NextResponse.json(
         { error: data.detail || 'Login failed' },
         { status: response.status }
@@ -50,9 +56,14 @@ export async function POST(request: NextRequest) {
       { status: 200 }
     )
   } catch (error) {
-    console.error('Login error:', error)
+    console.error('Login error details:', error)
+    console.error('Error message:', error instanceof Error ? error.message : 'Unknown error')
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { 
+        error: 'Internal server error',
+        details: error instanceof Error ? error.message : 'Unknown error',
+        backendUrl: BACKEND_URL 
+      },
       { status: 500 }
     )
   }
